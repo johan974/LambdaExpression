@@ -44,6 +44,10 @@ public class Instructor {
         return yearsOfExperience;
     }
 
+    public boolean hasMoreThanExperienceThanYears() {
+        return getYearsOfExperience() > 10;
+    }
+
     public void setYearsOfExperience(int yearsOfExperience) {
         this.yearsOfExperience = yearsOfExperience;
     }

@@ -19,13 +19,29 @@ public class StreamExample {
         List<Instructor> list = Instructors.getAll();
         list.stream().filter(p1).filter(p2);
 
+        // Method 1:
         Map<String, List<String>> map = list.stream()
                                 .filter(p1)
                                 .filter(p2)
                                 .peek(s-> System.out.println(s))
                                 .collect(Collectors.toMap(Instructor::getName, Instructor::getCourses));
+        System.out.println(map);
 
-        //System.out.println(map);
+        // Method 2: inner line
+        map = list.stream()
+                .filter((i) -> i.isOnlineCourses())
+                .filter((i) -> i.getYearsOfExperience()>10)
+                .peek(s-> System.out.println(s))
+                .collect(Collectors.toMap(Instructor::getName, Instructor::getCourses));
+        System.out.println(map);
+
+        // Method 3: all method references
+        map = list.stream()
+                .filter( Instructor::isOnlineCourses)
+                .filter( Instructor::hasMoreThanExperienceThanYears)
+                .peek( System.out::println)
+                .collect(Collectors.toMap(Instructor::getName, Instructor::getCourses));
+        System.out.println(map);
 
     }
 }
